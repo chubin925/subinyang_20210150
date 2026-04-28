@@ -163,8 +163,6 @@ function draw() {
   ellipse(px, py, pd, pd);
 }
 
-
-
 function canMove(nx, ny) {
   let r = pd / 2;
   let roadCheck = false;
@@ -182,5 +180,21 @@ function canMove(nx, ny) {
     }
   }
 
+  // 벽이랑 닿는지 확인
+  for (let i = 0; i < wallRects.length; i++) {
+    if (
+      nx + r > wallRects[i][0] &&
+      nx - r < wallRects[i][0] + wallRects[i][2] &&
+      ny + r > wallRects[i][1] &&
+      ny - r < wallRects[i][1] + wallRects[i][3]
+    ) {
+      wallCheck = true;
+    }
+  }
 
+  if (roadCheck === true && wallCheck === false) {
+    return true;
+  } else {
+    return false;
+  }
 }
