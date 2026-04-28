@@ -201,6 +201,17 @@ function draw() {
   noStroke();
   fill(255, 255, 0);
   ellipse(px, py, pd, pd);
+
+
+  //콩그리기
+  noStroke();
+  fill(255, 220, 120);
+
+  for (let i = 0; i < beanX.length; i++) {
+    if (beanActive[i] === true) {
+      ellipse(beanX[i], beanY[i], beanSize, beanSize);
+    }
+  }
 }
 
 function canMove(nx, ny) {
