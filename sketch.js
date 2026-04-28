@@ -4,7 +4,7 @@ let wallRects = [];
 
 let px = 512;
 let py = 330;
-let pd = 24;
+let pd = 30;
 
 let speed = 3;
 
@@ -278,28 +278,28 @@ function draw() {
   noStroke();
   fill(255, 255, 0);
 
-  let mouth = PI / 4;
+  let mouth = PI / 5;
 
   if (frameCount % 20 < 10) {
-    mouth = PI / 10;
+    mouth = PI / 12;
   } else {
-    mouth = PI / 4;
+    mouth = PI / 5;
   }
 
   if (dir === "right") {
-    arc(px, py, pd, pd, mouth, TWO_PI - mouth);
+    arc(px, py, pd, pd, mouth, TWO_PI - mouth, PIE);
   }
 
   if (dir === "left") {
-    arc(px, py, pd, pd, PI + mouth, PI + TWO_PI - mouth);
+    arc(px, py, pd, pd, PI + mouth, PI + TWO_PI - mouth, PIE);
   }
 
   if (dir === "up") {
-    arc(px, py, pd, pd, -HALF_PI + mouth, -HALF_PI + TWO_PI - mouth);
+    arc(px, py, pd, pd, -HALF_PI + mouth, TWO_PI - HALF_PI - mouth, PIE);
   }
 
   if (dir === "down") {
-    arc(px, py, pd, pd, HALF_PI + mouth, HALF_PI + TWO_PI - mouth);
+    arc(px, py, pd, pd, HALF_PI + mouth, HALF_PI + TWO_PI - mouth, PIE);
   }
 
   // 점수 표시
