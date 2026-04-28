@@ -8,6 +8,11 @@ let pd = 24;
 
 let speed = 3;
 
+let beanX = [];
+let beanY = [];
+let beanActive = [];
+let beanSize = 7;
+
 function setup() {
   createCanvas(1024, 560);
 
@@ -220,6 +225,55 @@ function canMove(nx, ny) {
       nx - r < wallRects[i][0] + wallRects[i][2] &&
       ny + r > wallRects[i][1] &&
       ny - r < wallRects[i][1] + wallRects[i][3]
+    ) {
+      wallCheck = true;
+    }
+  }
+
+  if (roadCheck === true && wallCheck === false) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function makeBeans() {
+  beanX = [];
+  beanY = [];
+  beanActive = [];
+
+  for (let y = 45; y <= 520; y += 28) {
+    for (let x = 25; x <= 1000; x += 28) {
+      if (canPutBean(x, y)) {
+        beanX.push(x);
+        beanY.push(y);
+        beanActive.push(true);
+      }
+    }
+  }
+}
+
+function canPutBean(x, y) {
+  let roadCheck = false;
+  let wallCheck = false;
+
+  for (let i = 0; i < roadRects.length; i++) {
+    if (
+      x >= roadRects[i][0] + 12 &&
+      x <= roadRects[i][0] + roadRects[i][2] - 12 &&
+      y >= roadRects[i][1] + 12 &&
+      y <= roadRects[i][1] + roadRects[i][3] - 12
+    ) {
+      roadCheck = true;
+    }
+  }
+
+  for (let i = 0; i < wallRects.length; i++) {
+    if (
+      x > wallRects[i][0] - 16 &&
+      x < wallRects[i][0] + wallRects[i][2] + 16 &&
+      y > wallRects[i][1] - 16 &&
+      y < wallRects[i][1] + wallRects[i][3] + 16
     ) {
       wallCheck = true;
     }
