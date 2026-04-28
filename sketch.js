@@ -146,6 +146,13 @@ function draw() {
       px -= speed;
     }
   }
+
+  if (keyIsDown(LEFT_ARROW)) {
+    if (canMove(px - speed, py)) {
+      px -= speed;
+    }
+  }
+
   if (keyIsDown(RIGHT_ARROW)) {
     if (canMove(px + speed, py)) {
       px += speed;
@@ -155,6 +162,22 @@ function draw() {
   if (keyIsDown(UP_ARROW)) {
     if (canMove(px, py - speed)) {
       py -= speed;
+    }
+  }
+
+  if (keyIsDown(DOWN_ARROW)) {
+    if (canMove(px, py + speed)) {
+      py += speed;
+    }
+  }
+
+  if (py > 256 && py < 295) {
+    if (px < -pd / 2) {
+      px = width - pd / 2;
+    }
+
+    if (px > width + pd / 2) {
+      px = pd / 2;
     }
   }
 
