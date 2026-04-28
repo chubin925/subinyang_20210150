@@ -35,9 +35,6 @@ function setup() {
     [128, 194, 209, 194],
     [128, 20, 128, 194],
   ];
-
-
-  
 }
 
 function draw() {
@@ -45,4 +42,21 @@ function draw() {
 
   noStroke();
   fill(5, 12, 95);
+
+  for (let i = 0; i < roadRects.length; i++) {
+    rect(roadRects[i][0], roadRects[i][1], roadRects[i][2], roadRects[i][3]);
+  }
+
+  noFill();
+  stroke(0, 210, 240);
+  strokeWeight(6);
+
+  for (let i = 0; i < outerLines.length; i++) {
+    line(
+      outerLines[i][0],
+      outerLines[i][1],
+      outerLines[i][2],
+      outerLines[i][3],
+    );
+  }
 }
