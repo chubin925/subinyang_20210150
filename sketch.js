@@ -170,94 +170,96 @@ function draw() {
     }
   }
 
-  // 팩맨 이동 코드
-  if (keyIsDown(LEFT_ARROW)) {
-    if (py >= 256 + pd / 2 && py <= 295 - pd / 2 && px <= pd / 2 + speed) {
-      px -= speed;
-    } else {
-      if (canMove(px - speed, py)) {
+  if (gameOver === false && gameClear === false) {
+    // 팩맨 이동 코드
+    if (keyIsDown(LEFT_ARROW)) {
+      if (py >= 256 + pd / 2 && py <= 295 - pd / 2 && px <= pd / 2 + speed) {
         px -= speed;
+      } else {
+        if (canMove(px - speed, py)) {
+          px -= speed;
+        }
       }
     }
-  }
 
-  if (keyIsDown(RIGHT_ARROW)) {
-    if (
-      py >= 256 + pd / 2 &&
-      py <= 295 - pd / 2 &&
-      px >= width - pd / 2 - speed
-    ) {
-      px += speed;
-    } else {
-      if (canMove(px + speed, py)) {
+    if (keyIsDown(RIGHT_ARROW)) {
+      if (
+        py >= 256 + pd / 2 &&
+        py <= 295 - pd / 2 &&
+        px >= width - pd / 2 - speed
+      ) {
         px += speed;
+      } else {
+        if (canMove(px + speed, py)) {
+          px += speed;
+        }
       }
     }
-  }
 
-  if (keyIsDown(UP_ARROW)) {
-    if (canMove(px, py - speed)) {
-      py -= speed;
-    }
-  }
-
-  if (keyIsDown(DOWN_ARROW)) {
-    if (canMove(px, py + speed)) {
-      py += speed;
-    }
-  }
-  //워프
-  if (py >= 256 && py <= 295) {
-    if (px < -pd / 2) {
-      px = width - pd / 2;
-    }
-
-    if (px > width + pd / 2) {
-      px = pd / 2;
-    }
-  }
-
-  // 콩 먹기
-  for (let i = 0; i < beanX.length; i++) {
-    if (beanActive[i] === true) {
-      let d = dist(px, py, beanX[i], beanY[i]);
-
-      if (d < pd / 2 + beanSize / 2) {
-        beanActive[i] = false;
-        score = score + 1;
+    if (keyIsDown(UP_ARROW)) {
+      if (canMove(px, py - speed)) {
+        py -= speed;
       }
     }
-  }
 
-  //적
-  fill(255, 60, 80);
-  stroke(255);
-  strokeWeight(2);
-
-  for (let i = 0; i < enemyCount; i++) {
-    ellipse(enemyX[i], enemyY[i], enemySize, enemySize);
-  }
-  // 적 충돌
-  for (let i = 0; i < enemyCount; i++) {
-    let d = dist(px, py, enemyX[i], enemyY[i]);
-
-    if (d < pd / 2 + enemySize / 2) {
-      energy = energy - 1;
-
-      let n = int(random(beanX.length));
-      enemyX[i] = beanX[n];
-      enemyY[i] = beanY[n];
+    if (keyIsDown(DOWN_ARROW)) {
+      if (canMove(px, py + speed)) {
+        py += speed;
+      }
     }
-  }
+    //워프
+    if (py >= 256 && py <= 295) {
+      if (px < -pd / 2) {
+        px = width - pd / 2;
+      }
 
-  //승리
-  if (score >= beanX.length) {
-    gameClear = true;
-  }
+      if (px > width + pd / 2) {
+        px = pd / 2;
+      }
+    }
 
-  //패배
-  if (energy <= 0) {
-    gameOver = true;
+    // 콩 먹기
+    for (let i = 0; i < beanX.length; i++) {
+      if (beanActive[i] === true) {
+        let d = dist(px, py, beanX[i], beanY[i]);
+
+        if (d < pd / 2 + beanSize / 2) {
+          beanActive[i] = false;
+          score = score + 1;
+        }
+      }
+    }
+
+    //적
+    fill(255, 60, 80);
+    stroke(255);
+    strokeWeight(2);
+
+    for (let i = 0; i < enemyCount; i++) {
+      ellipse(enemyX[i], enemyY[i], enemySize, enemySize);
+    }
+    // 적 충돌
+    for (let i = 0; i < enemyCount; i++) {
+      let d = dist(px, py, enemyX[i], enemyY[i]);
+
+      if (d < pd / 2 + enemySize / 2) {
+        energy = energy - 1;
+
+        let n = int(random(beanX.length));
+        enemyX[i] = beanX[n];
+        enemyY[i] = beanY[n];
+      }
+    }
+
+    //승리
+    if (score >= beanX.length) {
+      gameClear = true;
+    }
+
+    //패배
+    if (energy <= 0) {
+      gameOver = true;
+    }
   }
   // 팩맨 그리기
   noStroke();
