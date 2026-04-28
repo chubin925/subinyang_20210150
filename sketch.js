@@ -13,6 +13,8 @@ let beanY = [];
 let beanActive = [];
 let beanSize = 7;
 
+let score = 0;
+
 function setup() {
   createCanvas(1024, 560);
 
@@ -147,6 +149,16 @@ function draw() {
   fill(255, 255, 0);
   ellipse(px, py, pd, pd);
 
+  //콩그리기
+  noStroke();
+  fill(255, 220, 120);
+
+  for (let i = 0; i < beanX.length; i++) {
+    if (beanActive[i] === true) {
+      ellipse(beanX[i], beanY[i], beanSize, beanSize);
+    }
+  }
+
   // 팩맨 이동 코드
   if (keyIsDown(LEFT_ARROW)) {
     dir = "left";
@@ -188,6 +200,7 @@ function draw() {
     }
   }
 
+  //워프
   if (py >= 256 && py <= 295) {
     if (px < -pd / 2) {
       px = width - pd / 2;
@@ -197,21 +210,28 @@ function draw() {
       px = pd / 2;
     }
   }
+
+  // 콩 먹기
+  for (let i = 0; i < beanX.length; i++) {
+    if (beanActive[i] === true) {
+      let d = dist(px, py, beanX[i], beanY[i]);
+
+      if (d < pd / 2 + beanSize / 2) {
+        beanActive[i] = false;
+        score = score + 1;
+      }
+    }
+  }
   // 팩맨 그리기
   noStroke();
   fill(255, 255, 0);
   ellipse(px, py, pd, pd);
 
-
-  //콩그리기
+  // 점수 표시
   noStroke();
-  fill(255, 220, 120);
-
-  for (let i = 0; i < beanX.length; i++) {
-    if (beanActive[i] === true) {
-      ellipse(beanX[i], beanY[i], beanSize, beanSize);
-    }
-  }
+  fill(255);
+  textSize(18);
+  text("점수: " + score, 20, 25);
 }
 
 function canMove(nx, ny) {
