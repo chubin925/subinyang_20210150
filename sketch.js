@@ -142,20 +142,22 @@ function draw() {
 
   // 팩맨 이동 코드
   if (keyIsDown(LEFT_ARROW)) {
-    if (canMove(px - speed, py)) {
+    if (py > 256 && py < 295 && px < 15) {
       px -= speed;
-    }
-  }
-
-  if (keyIsDown(LEFT_ARROW)) {
-    if (canMove(px - speed, py)) {
-      px -= speed;
+    } else {
+      if (canMove(px - speed, py)) {
+        px -= speed;
+      }
     }
   }
 
   if (keyIsDown(RIGHT_ARROW)) {
-    if (canMove(px + speed, py)) {
+    if (py > 256 && py < 295 && px > width - 15) {
       px += speed;
+    } else {
+      if (canMove(px + speed, py)) {
+        px += speed;
+      }
     }
   }
 
@@ -180,7 +182,6 @@ function draw() {
       px = pd / 2;
     }
   }
-
   // 팩맨 그리기
   noStroke();
   fill(255, 255, 0);
