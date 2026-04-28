@@ -35,6 +35,9 @@ function setup() {
     [128, 194, 209, 194],
     [128, 20, 128, 194],
   ];
+
+  wallRects = [[0, 0, 0, 0]
+];
 }
 
 function draw() {
@@ -58,5 +61,12 @@ function draw() {
       outerLines[i][2],
       outerLines[i][3],
     );
+  }
+
+  fill(0);
+  stroke(0, 210, 240);
+  strokeWeight(4);
+  for (let i = 0; i < wallRects.length; i++) {
+    rect(wallRects[i][0], wallRects[i][1], wallRects[i][2], wallRects[i][3]);
   }
 }
