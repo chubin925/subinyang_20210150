@@ -142,7 +142,9 @@ function draw() {
 
   // 팩맨 이동 코드
   if (keyIsDown(LEFT_ARROW)) {
-    if (py > 256 && py < 295 && px < 15) {
+    dir = "left";
+
+    if (py >= 256 && py <= 295 && px <= 15) {
       px -= speed;
     } else {
       if (canMove(px - speed, py)) {
@@ -152,7 +154,9 @@ function draw() {
   }
 
   if (keyIsDown(RIGHT_ARROW)) {
-    if (py > 256 && py < 295 && px > width - 15) {
+    dir = "right";
+
+    if (py >= 256 && py <= 295 && px >= width - 15) {
       px += speed;
     } else {
       if (canMove(px + speed, py)) {
@@ -162,12 +166,16 @@ function draw() {
   }
 
   if (keyIsDown(UP_ARROW)) {
+    dir = "up";
+
     if (canMove(px, py - speed)) {
       py -= speed;
     }
   }
 
   if (keyIsDown(DOWN_ARROW)) {
+    dir = "down";
+
     if (canMove(px, py + speed)) {
       py += speed;
     }
