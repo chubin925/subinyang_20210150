@@ -161,9 +161,7 @@ function draw() {
     rect(wallRects[i][0], wallRects[i][1], wallRects[i][2], wallRects[i][3]);
   }
 
-  noStroke();
-  fill(255, 255, 0);
-  ellipse(px, py, pd, pd);
+  
 
   //콩그리기
   noStroke();
@@ -278,7 +276,7 @@ function draw() {
   // 팩맨 그리기
   noStroke();
   fill(255, 255, 0);
-  ellipse(px, py, pd, pd);
+
 
   let mouth = PI / 5;
 
@@ -466,7 +464,7 @@ function makeEnemies() {
 
 function resetGame() {
   px = 512;
-  py = 330;
+  py = 340;
 
   score = 0;
   energy = 3;
