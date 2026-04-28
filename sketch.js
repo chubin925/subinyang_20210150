@@ -26,6 +26,8 @@ let gameOver = false;
 let gameClear = false;
 
 let dir = "right";
+let addEnemy1 = false;
+let addEnemy2 = false;
 
 function setup() {
   createCanvas(1024, 560);
@@ -269,24 +271,32 @@ function draw() {
     }
   }
 
-  //팩맨그리기
+  // 팩맨 그리기
   noStroke();
   fill(255, 255, 0);
 
+  let mouth = PI / 4;
+
+  if (frameCount % 20 < 10) {
+    mouth = PI / 10;
+  } else {
+    mouth = PI / 4;
+  }
+
   if (dir === "right") {
-    arc(px, py, pd, pd, PI / 4, 1.7 * PI);
+    arc(px, py, pd, pd, mouth, TWO_PI - mouth);
   }
 
   if (dir === "left") {
-    arc(px, py, pd, pd, PI + PI / 4, PI + 1.7 * PI);
+    arc(px, py, pd, pd, PI + mouth, PI + TWO_PI - mouth);
   }
 
   if (dir === "up") {
-    arc(px, py, pd, pd, PI + PI / 1.3, TWO_PI + PI / 4);
+    arc(px, py, pd, pd, -HALF_PI + mouth, -HALF_PI + TWO_PI - mouth);
   }
 
   if (dir === "down") {
-    arc(px, py, pd, pd, PI / 4, PI + PI / 1.3);
+    arc(px, py, pd, pd, HALF_PI + mouth, HALF_PI + TWO_PI - mouth);
   }
 
   // 점수 표시
@@ -313,6 +323,17 @@ function draw() {
     textSize(45);
     text("GAME OVER", width / 2, height / 2);
     textAlign(LEFT);
+  }
+
+  //난이도
+  if (score >= 30 && addEnemy1 === false) {
+    addEnemy();
+    addEnemy1 = true;
+  }
+
+  if (score >= 60 && addEnemy2 === false) {
+    addEnemy();
+    addEnemy2 = true;
   }
 }
 function pointOnRoad(tx, ty) {
@@ -434,6 +455,10 @@ function resetGame() {
   score = 0;
   energy = 3;
 
+  enemyCount = 5;
+  addEnemy1 = false;
+  addEnemy2 = false;
+
   gameOver = false;
   gameClear = false;
 
@@ -445,4 +470,13 @@ function keyPressed() {
   if (key === "r" || key === "R") {
     resetGame();
   }
+}
+
+function addEnemy() {
+  let n = int(random(beanX.length));
+
+  enemyX.push(beanX[n]);
+  enemyY.push(beanY[n]);
+
+  enemyCount = enemyCount + 1;
 }
