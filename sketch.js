@@ -25,6 +25,8 @@ let energy = 3;
 let gameOver = false;
 let gameClear = false;
 
+let dir = "right";
+
 function setup() {
   createCanvas(1024, 560);
 
@@ -119,8 +121,7 @@ function setup() {
     [815, 397, 21, 64],
   ];
 
-  makeBeans();
-  makeEnemies();
+  resetGame();
 }
 
 function draw() {
@@ -173,6 +174,8 @@ function draw() {
   if (gameOver === false && gameClear === false) {
     // 팩맨 이동 코드
     if (keyIsDown(LEFT_ARROW)) {
+      dir = "left";
+
       if (py >= 256 + pd / 2 && py <= 295 - pd / 2 && px <= pd / 2 + speed) {
         px -= speed;
       } else {
@@ -183,6 +186,8 @@ function draw() {
     }
 
     if (keyIsDown(RIGHT_ARROW)) {
+      dir = "right";
+
       if (
         py >= 256 + pd / 2 &&
         py <= 295 - pd / 2 &&
@@ -197,12 +202,14 @@ function draw() {
     }
 
     if (keyIsDown(UP_ARROW)) {
+      dir = "up";
       if (canMove(px, py - speed)) {
         py -= speed;
       }
     }
 
     if (keyIsDown(DOWN_ARROW)) {
+      dir = "down";
       if (canMove(px, py + speed)) {
         py += speed;
       }
@@ -261,10 +268,26 @@ function draw() {
       gameOver = true;
     }
   }
-  // 팩맨 그리기
+
+  //팩맨그리기
   noStroke();
   fill(255, 255, 0);
-  ellipse(px, py, pd, pd);
+
+  if (dir === "right") {
+    arc(px, py, pd, pd, PI / 4, 1.7 * PI);
+  }
+
+  if (dir === "left") {
+    arc(px, py, pd, pd, PI + PI / 4, PI + 1.7 * PI);
+  }
+
+  if (dir === "up") {
+    arc(px, py, pd, pd, PI + PI / 1.3, TWO_PI + PI / 4);
+  }
+
+  if (dir === "down") {
+    arc(px, py, pd, pd, PI / 4, PI + PI / 1.3);
+  }
 
   // 점수 표시
   noStroke();
@@ -272,6 +295,7 @@ function draw() {
   textSize(17);
   text("점수: " + score, 20, 25);
   text("에너지: " + energy, 20, 50);
+  text("R키: 다시 시작", 20, 75);
 
   //게임클리어
   if (gameClear === true) {
@@ -415,4 +439,10 @@ function resetGame() {
 
   makeBeans();
   makeEnemies();
+}
+
+function keyPressed() {
+  if (key === "r" || key === "R") {
+    resetGame();
+  }
 }
