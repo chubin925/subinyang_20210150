@@ -181,7 +181,7 @@ function draw() {
     }
   }
 
-  if (py > 256 && py < 295) {
+  if (py >= 256 && py <= 295) {
     if (px < -pd / 2) {
       px = width - pd / 2;
     }
