@@ -1,33 +1,23 @@
-let px, py;
-let pd = 24;
-let speed = 3;
-let dir = "right"; //방향
-
-let score = 0;
-let energy = 3;
-
-let gameOver = false;
-let gameClear = false;
-
-// 맵배열
 let roadRects = [];
 let outerLines = [];
 let wallRects = [];
 
-//콩, 적 만들어야댐
-
 function setup() {
   createCanvas(1024, 560);
 
-  // 길
-  roadRects = [];
-
-  // 바깥 테두리
-  outerLines = [];
+  outerLines = [
+    [128, 20, 896, 20],
+    [896, 20, 896, 194],
+    [896, 194, 815, 194],
+    [815, 194, 815, 256],
+    [815, 256, 1024, 256],
+    [815, 295, 1024, 295],
+  ];
 }
 
 function draw() {
   background(0);
+
+  noStroke();
+  fill(5, 12, 95);
 }
-
-
