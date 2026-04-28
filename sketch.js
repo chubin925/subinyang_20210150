@@ -6,6 +6,8 @@ let px = 512;
 let py = 330;
 let pd = 24;
 
+let speed = 3;
+
 function setup() {
   createCanvas(1024, 560);
 
@@ -137,4 +139,20 @@ function draw() {
   noStroke();
   fill(255, 255, 0);
   ellipse(px, py, pd, pd);
+
+  if (keyIsDown(LEFT_ARROW)) {
+  px -= speed;
+}
+
+if (keyIsDown(RIGHT_ARROW)) {
+  px += speed;
+}
+
+if (keyIsDown(UP_ARROW)) {
+  py -= speed;
+}
+
+if (keyIsDown(DOWN_ARROW)) {
+  py += speed;
+}
 }
