@@ -196,10 +196,10 @@ function canMove(nx, ny) {
   // 길 위에 있는지 확인
   for (let i = 0; i < roadRects.length; i++) {
     if (
-      nx > roadRects[i][0] &&
-      nx < roadRects[i][0] + roadRects[i][2] &&
-      ny > roadRects[i][1] &&
-      ny < roadRects[i][1] + roadRects[i][3]
+      nx >= roadRects[i][0] &&
+      nx <= roadRects[i][0] + roadRects[i][2] &&
+      ny >= roadRects[i][1] &&
+      ny <= roadRects[i][1] + roadRects[i][3]
     ) {
       roadCheck = true;
     }
