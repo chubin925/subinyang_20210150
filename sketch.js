@@ -2,6 +2,10 @@ let roadRects = [];
 let outerLines = [];
 let wallRects = [];
 
+let px = 512;
+let py = 330;
+let pd = 24;
+
 function setup() {
   createCanvas(1024, 560);
 
@@ -129,4 +133,8 @@ function draw() {
   for (let i = 0; i < wallRects.length; i++) {
     rect(wallRects[i][0], wallRects[i][1], wallRects[i][2], wallRects[i][3]);
   }
+
+  noStroke();
+  fill(255, 255, 0);
+  ellipse(px, py, pd, pd);
 }
