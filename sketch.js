@@ -106,6 +106,8 @@ function setup() {
 
     [815, 397, 21, 64],
   ];
+
+  makeBeans();
 }
 
 function draw() {
