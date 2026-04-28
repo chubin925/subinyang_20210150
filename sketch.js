@@ -115,6 +115,7 @@ function setup() {
   ];
 
   makeBeans();
+  makeEnemies();
 }
 
 function draw() {
@@ -227,6 +228,15 @@ function draw() {
       }
     }
   }
+
+  //적
+  fill(255, 60, 80);
+  stroke(255);
+  strokeWeight(2);
+
+  for (let i = 0; i < enemyCount; i++) {
+    ellipse(enemyX[i], enemyY[i], enemySize, enemySize);
+  }
   // 팩맨 그리기
   noStroke();
   fill(255, 255, 0);
@@ -321,5 +331,17 @@ function canPutBean(x, y) {
     return true;
   } else {
     return false;
+  }
+}
+
+function makeEnemies() {
+  enemyX = [];
+  enemyY = [];
+
+  for (let i = 0; i < enemyCount; i++) {
+    let n = int(random(beanX.length));
+
+    enemyX.push(beanX[n]);
+    enemyY.push(beanY[n]);
   }
 }
