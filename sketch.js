@@ -140,7 +140,6 @@ function draw() {
   fill(255, 255, 0);
   ellipse(px, py, pd, pd);
 
-
   // 팩맨 이동 코드
   if (keyIsDown(LEFT_ARROW)) {
     px -= speed;
@@ -157,4 +156,9 @@ function draw() {
   if (keyIsDown(DOWN_ARROW)) {
     py += speed;
   }
+
+  // 팩맨 그리기
+  noStroke();
+  fill(255, 255, 0);
+  ellipse(px, py, pd, pd);
 }
