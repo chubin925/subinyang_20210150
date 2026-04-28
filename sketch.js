@@ -20,6 +20,11 @@ let enemyY = [];
 let enemySize = 22;
 let enemyCount = 5;
 
+let energy = 3;
+
+let gameOver = false;
+let gameClear = false;
+
 function setup() {
   createCanvas(1024, 560);
 
@@ -237,6 +242,28 @@ function draw() {
   for (let i = 0; i < enemyCount; i++) {
     ellipse(enemyX[i], enemyY[i], enemySize, enemySize);
   }
+  // 적 충돌
+  for (let i = 0; i < enemyCount; i++) {
+    let d = dist(px, py, enemyX[i], enemyY[i]);
+
+    if (d < pd / 2 + enemySize / 2) {
+      energy = energy - 1;
+
+      let n = int(random(beanX.length));
+      enemyX[i] = beanX[n];
+      enemyY[i] = beanY[n];
+    }
+  }
+
+  //승리
+  if (score >= beanX.length) {
+    gameClear = true;
+  }
+
+  //패배
+  if (energy <= 0) {
+    gameOver = true;
+  }
   // 팩맨 그리기
   noStroke();
   fill(255, 255, 0);
@@ -245,8 +272,27 @@ function draw() {
   // 점수 표시
   noStroke();
   fill(255);
-  textSize(18);
+  textSize(17);
   text("점수: " + score, 20, 25);
+  text("에너지: " + energy, 20, 50);
+
+  //게임클리어
+  if (gameClear === true) {
+    fill(255);
+    textAlign(CENTER);
+    textSize(45);
+    text("CLEAR!", width / 2, height / 2);
+    textAlign(LEFT);
+  }
+
+  //게임 오버
+  if (gameOver === true) {
+    fill(255, 80, 80);
+    textAlign(CENTER);
+    textSize(45);
+    text("GAME OVER", width / 2, height / 2);
+    textAlign(LEFT);
+  }
 }
 
 function canMove(nx, ny) {
