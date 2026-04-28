@@ -172,9 +172,7 @@ function draw() {
 
   // 팩맨 이동 코드
   if (keyIsDown(LEFT_ARROW)) {
-    dir = "left";
-
-    if (py >= 256 && py <= 295 && px <= 15) {
+    if (py >= 256 + pd / 2 && py <= 295 - pd / 2 && px <= pd / 2 + speed) {
       px -= speed;
     } else {
       if (canMove(px - speed, py)) {
@@ -184,9 +182,11 @@ function draw() {
   }
 
   if (keyIsDown(RIGHT_ARROW)) {
-    dir = "right";
-
-    if (py >= 256 && py <= 295 && px >= width - 15) {
+    if (
+      py >= 256 + pd / 2 &&
+      py <= 295 - pd / 2 &&
+      px >= width - pd / 2 - speed
+    ) {
       px += speed;
     } else {
       if (canMove(px + speed, py)) {
@@ -196,21 +196,16 @@ function draw() {
   }
 
   if (keyIsDown(UP_ARROW)) {
-    dir = "up";
-
     if (canMove(px, py - speed)) {
       py -= speed;
     }
   }
 
   if (keyIsDown(DOWN_ARROW)) {
-    dir = "down";
-
     if (canMove(px, py + speed)) {
       py += speed;
     }
   }
-
   //워프
   if (py >= 256 && py <= 295) {
     if (px < -pd / 2) {
@@ -294,22 +289,36 @@ function draw() {
     textAlign(LEFT);
   }
 }
+function pointOnRoad(tx, ty) {
+  let roadCheck = false;
+
+  for (let i = 0; i < roadRects.length; i++) {
+    if (
+      tx >= roadRects[i][0] &&
+      tx <= roadRects[i][0] + roadRects[i][2] &&
+      ty >= roadRects[i][1] &&
+      ty <= roadRects[i][1] + roadRects[i][3]
+    ) {
+      roadCheck = true;
+    }
+  }
+
+  return roadCheck;
+}
 
 function canMove(nx, ny) {
   let r = pd / 2;
   let roadCheck = false;
   let wallCheck = false;
 
-  // 길 위에 있는지 확인
-  for (let i = 0; i < roadRects.length; i++) {
-    if (
-      nx >= roadRects[i][0] &&
-      nx <= roadRects[i][0] + roadRects[i][2] &&
-      ny >= roadRects[i][1] &&
-      ny <= roadRects[i][1] + roadRects[i][3]
-    ) {
-      roadCheck = true;
-    }
+  if (
+    pointOnRoad(nx, ny) &&
+    pointOnRoad(nx - r, ny) &&
+    pointOnRoad(nx + r, ny) &&
+    pointOnRoad(nx, ny - r) &&
+    pointOnRoad(nx, ny + r)
+  ) {
+    roadCheck = true;
   }
 
   // 벽이랑 닿는지 확인
