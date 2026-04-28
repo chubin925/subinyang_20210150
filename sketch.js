@@ -264,7 +264,7 @@ function draw() {
     }
 
     //승리
-    if (score >= beanX.length) {
+    if (beanX.length > 0 && score >= beanX.length) {
       gameClear = true;
     }
 
@@ -275,8 +275,10 @@ function draw() {
   }
 
   // 팩맨 그리기
+  // 팩맨 그리기
   noStroke();
   fill(255, 255, 0);
+  ellipse(px, py, pd, pd);
 
   let mouth = PI / 5;
 
