@@ -29,6 +29,8 @@ let dir = "right";
 let addEnemy1 = false;
 let addEnemy2 = false;
 
+let hitTime = 0;
+
 function setup() {
   createCanvas(1024, 560);
 
@@ -251,8 +253,9 @@ function draw() {
     for (let i = 0; i < enemyCount; i++) {
       let d = dist(px, py, enemyX[i], enemyY[i]);
 
-      if (d < pd / 2 + enemySize / 2) {
+      if (d < pd / 2 + enemySize / 2 && hitTime === 0) {
         energy = energy - 1;
+        hitTime = 40;
 
         let n = int(random(beanX.length));
         enemyX[i] = beanX[n];
@@ -334,6 +337,10 @@ function draw() {
   if (score >= 60 && addEnemy2 === false) {
     addEnemy();
     addEnemy2 = true;
+  }
+
+  if (hitTime > 0) {
+    hitTime = hitTime - 1;
   }
 }
 function pointOnRoad(tx, ty) {
@@ -454,6 +461,7 @@ function resetGame() {
 
   score = 0;
   energy = 3;
+  hitTime = 0;
 
   enemyCount = 5;
   addEnemy1 = false;
