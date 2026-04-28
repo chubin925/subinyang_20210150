@@ -402,3 +402,17 @@ function makeEnemies() {
     enemyY.push(beanY[n]);
   }
 }
+
+function resetGame() {
+  px = 512;
+  py = 330;
+
+  score = 0;
+  energy = 3;
+
+  gameOver = false;
+  gameClear = false;
+
+  makeBeans();
+  makeEnemies();
+}
