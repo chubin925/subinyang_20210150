@@ -316,6 +316,10 @@ function draw() {
     textAlign(CENTER);
     textSize(45);
     text("CLEAR!", width / 2, height / 2);
+
+    textSize(20);
+    text("R키를 누르면 다시 시작", width / 2, height / 2 + 40);
+
     textAlign(LEFT);
   }
 
@@ -325,9 +329,12 @@ function draw() {
     textAlign(CENTER);
     textSize(45);
     text("GAME OVER", width / 2, height / 2);
+
+    textSize(20);
+    text("R키를 누르면 다시 시작", width / 2, height / 2 + 40);
+
     textAlign(LEFT);
   }
-
   //난이도
   if (score >= 30 && addEnemy1 === false) {
     addEnemy();
