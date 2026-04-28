@@ -1,9 +1,8 @@
 let roadRects = [];
 let outerLines = [];
 let wallRects = [];
-
-let px = 512;
-let py = 340;
+let px = 225;
+let py = 275;
 let pd = 30;
 
 let speed = 3;
@@ -215,7 +214,7 @@ function draw() {
       }
     }
     //워프
-    if (py >= 256 && py <= 295) {
+    if (py >= 256 + pd / 2 && py <= 295 - pd / 2) {
       if (px < -pd / 2) {
         px = width - pd / 2;
       }
@@ -458,8 +457,8 @@ function makeEnemies() {
 }
 
 function resetGame() {
-  px = 512;
-  py = 340;
+  px = 225;
+  py = 275;
 
   score = 0;
   energy = 3;
