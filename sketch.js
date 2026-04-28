@@ -141,12 +141,22 @@ function draw() {
   ellipse(px, py, pd, pd);
 
   // 팩맨 이동 코드
-if (keyIsDown(LEFT_ARROW)) {
-  if (canMove(px - speed, py)) {
-    px -= speed;
+  if (keyIsDown(LEFT_ARROW)) {
+    if (canMove(px - speed, py)) {
+      px -= speed;
+    }
   }
-}
+  if (keyIsDown(RIGHT_ARROW)) {
+    if (canMove(px + speed, py)) {
+      px += speed;
+    }
+  }
 
+  if (keyIsDown(UP_ARROW)) {
+    if (canMove(px, py - speed)) {
+      py -= speed;
+    }
+  }
 
   // 팩맨 그리기
   noStroke();
