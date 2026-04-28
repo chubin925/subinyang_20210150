@@ -140,19 +140,21 @@ function draw() {
   fill(255, 255, 0);
   ellipse(px, py, pd, pd);
 
+
+  // 팩맨 이동 코드
   if (keyIsDown(LEFT_ARROW)) {
-  px -= speed;
-}
+    px -= speed;
+  }
 
-if (keyIsDown(RIGHT_ARROW)) {
-  px += speed;
-}
+  if (keyIsDown(RIGHT_ARROW)) {
+    px += speed;
+  }
 
-if (keyIsDown(UP_ARROW)) {
-  py -= speed;
-}
+  if (keyIsDown(UP_ARROW)) {
+    py -= speed;
+  }
 
-if (keyIsDown(DOWN_ARROW)) {
-  py += speed;
-}
+  if (keyIsDown(DOWN_ARROW)) {
+    py += speed;
+  }
 }
