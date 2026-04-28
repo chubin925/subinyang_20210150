@@ -3,7 +3,7 @@ let outerLines = [];
 let wallRects = [];
 
 let px = 512;
-let py = 330;
+let py = 340;
 let pd = 30;
 
 let speed = 3;
@@ -161,8 +161,6 @@ function draw() {
     rect(wallRects[i][0], wallRects[i][1], wallRects[i][2], wallRects[i][3]);
   }
 
-  
-
   //콩그리기
   noStroke();
   fill(255, 220, 120);
@@ -273,10 +271,8 @@ function draw() {
   }
 
   // 팩맨 그리기
-  // 팩맨 그리기
   noStroke();
   fill(255, 255, 0);
-
 
   let mouth = PI / 5;
 
@@ -301,7 +297,6 @@ function draw() {
   if (dir === "down") {
     arc(px, py, pd, pd, HALF_PI + mouth, HALF_PI + TWO_PI - mouth, PIE);
   }
-
   // 점수 표시
   noStroke();
   fill(255);
