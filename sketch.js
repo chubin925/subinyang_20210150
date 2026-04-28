@@ -15,6 +15,11 @@ let beanSize = 7;
 
 let score = 0;
 
+let enemyX = [];
+let enemyY = [];
+let enemySize = 22;
+let enemyCount = 5;
+
 function setup() {
   createCanvas(1024, 560);
 
